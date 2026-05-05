@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend_Peseudotutor.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend_lairn.settings')
 
 application = get_asgi_application()

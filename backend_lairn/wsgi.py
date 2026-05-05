@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend_Peseudotutor.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend_lairn.settings')
 
 application = get_wsgi_application()

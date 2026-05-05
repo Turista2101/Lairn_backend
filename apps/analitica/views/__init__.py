@@ -1,0 +1,5 @@
+from .vista_resultados import VistaMisResultados, VistaResultadosCurso
+from .vista_avance_estudiante import VistaAvanceEstudiante
+from .vista_modelo_conocimiento import VistaModeloConocimientoEstudiante
+from .vista_patrones_curso import VistaPatronesCurso
+from .vista_resumen_curso import VistaResumenCurso
