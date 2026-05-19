@@ -4,18 +4,24 @@
 
 ---
 
-## Índice de Documentación
+## Documentación
 
 | Documento | Descripción |
 |-----------|-------------|
-| [Arquitectura del Sistema](docs/arquitectura.md) | Stack tecnológico, estructura de carpetas y diagrama de apps |
-| [Autenticación y Usuarios](docs/autenticacion.md) | Registro, login, JWT, roles y permisos |
-| [Cursos y Exámenes](docs/cursos-examenes.md) | Gestión de cursos, inscripciones y configuración de exámenes |
-| [Motor Adaptativo](docs/motor-adaptativo.md) | Motor de IA, sesiones, ajuste de dificultad y modelo de conocimiento |
-| [Analítica y Reportes](docs/analitica.md) | Resultados, avances, patrones y resúmenes por curso |
-| [Referencia de la API](docs/api-referencia.md) | Todos los endpoints, métodos, parámetros y ejemplos |
-| [Variables de Entorno](docs/variables-entorno.md) | Configuración de entorno y secretos |
-| [Despliegue con Docker](docs/despliegue.md) | Configuración Docker, Docker Compose y producción |
+| [Por Donde Empezar](docs/POR_DONDE_EMPEZAR.md) | Punto de entrada según tu rol |
+| [Inicio Rápido](docs/INICIO_RAPIDO.md) | De cero a servidor corriendo con Docker |
+| [Instalación](docs/INSTALACION.md) | Instalación local sin Docker |
+| [Variables de Entorno](docs/VARIABLES_ENTORNO.md) | Configuración de entorno y secretos |
+| [Estructura](docs/ESTRUCTURA.md) | Mapa del repositorio y convenciones |
+| [Arquitectura](docs/ARQUITECTURA.md) | Diagrama del sistema y decisiones de diseño |
+| [Autenticación y Endpoints](docs/AUTENTICACION.md) | Todos los endpoints con ejemplos |
+| [Base de Datos](docs/BASE_DE_DATOS.md) | Modelos, relaciones y migraciones |
+| [Manejo de Errores](docs/MANEJO_ERRORES.md) | Catálogo de errores HTTP |
+| [Seguridad](docs/SEGURIDAD.md) | Configuración segura para producción |
+| [Contribuir](docs/CONTRIBUIR.md) | Flujo de trabajo y convenciones |
+| [Resumen del Proyecto](docs/RESUMEN_PROYECTO.md) | Visión general sin tecnicismos |
+| [Comandos](docs/COMANDOS.md) | Referencia de comandos Docker y Django |
+| [Guía Completa de Endpoints](docs/GUIA_COMPLETA_ENDPOINTS.md) | Explicación de cada endpoint en lenguaje simple |
 
 ---
 
@@ -38,7 +44,7 @@ Rol: Docente                  Rol: Estudiante
 | Django | 6.0.4 | Framework web |
 | Django REST Framework | 3.17.1 | API REST |
 | PostgreSQL | 16 | Base de datos |
-| Claude Haiku | 4.5 | Generación de preguntas IA |
+| GPT-4o Mini (OpenAI) | — | Generación de preguntas IA |
 | SimpleJWT | 5.5.1 | Autenticación JWT |
 | Docker / Compose | latest | Contenedorización |
 
@@ -55,12 +61,16 @@ cd backend_lairn
 
 # 2. Configurar variables de entorno
 cp .env.example .env
-# Editar .env con tus valores (especialmente ANTHROPIC_API_KEY)
+# Editar .env con tus valores (especialmente OPENAI_API_KEY)
 
 # 3. Levantar servicios
 docker-compose up --build
 
-# 4. La API estará disponible en:
+# 4. Crear roles y usuarios de prueba
+docker-compose exec web python manage.py seed_roles
+docker-compose exec web python manage.py seed_usuarios
+
+# 5. La API estará disponible en:
 # http://localhost:8000/api/
 ```
 
@@ -104,30 +114,23 @@ Creados por `python manage.py seed_usuarios`:
 
 ```
 backend_lairn/
-├── README.md                    ← Este archivo
-├── docs/                        ← Documentación detallada
-│   ├── arquitectura.md
-│   ├── autenticacion.md
-│   ├── cursos-examenes.md
-│   ├── motor-adaptativo.md
-│   ├── analitica.md
-│   ├── api-referencia.md
-│   ├── variables-entorno.md
-│   └── despliegue.md
-├── manage.py
+├── README.md
+├── .env.example                 ← Plantilla de variables de entorno
 ├── requirements.txt
 ├── Dockerfile
 ├── docker-compose.yml
+├── manage.py
 ├── backend_lairn/               ← Configuración Django
-├── core/                        ← Utilidades compartidas
-└── apps/                        ← Módulos de negocio
-    ├── users/
-    ├── examenes/
-    ├── motor_adaptativo/
-    ├── analitica/
-    └── moderacion/
+├── core/                        ← Utilidades compartidas (permisos por rol)
+├── apps/                        ← Módulos de negocio
+│   ├── users/                   ← Autenticación y usuarios
+│   ├── examenes/                ← Cursos, exámenes e inscripciones
+│   ├── motor_adaptativo/        ← Motor de IA y sesiones de examen
+│   ├── analitica/               ← Resultados y estadísticas
+│   └── moderacion/              ← Pendiente de implementación
+└── docs/                        ← Documentación completa
 ```
 
 ---
 
-*Lairn — Adaptive Learning API · Django 6 · Python 3.12 · PostgreSQL 16 · Claude AI*
+*Lairn — Adaptive Learning API · Django 6 · Python 3.12 · PostgreSQL 16 · OpenAI GPT-4o Mini*
