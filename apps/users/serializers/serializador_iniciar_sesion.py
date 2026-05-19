@@ -12,8 +12,11 @@ class SerializadorIniciarSesion(serializers.Serializer):
         if not usuario:
             raise serializers.ValidationError('Correo o contraseña incorrectos.')
         token_refresco = RefreshToken.for_user(usuario)
+        rol = usuario.role.name if usuario.role else None
+        token_refresco['rol'] = rol
+        token_refresco.access_token['rol'] = rol
         return {
             'access': str(token_refresco.access_token),
             'refresh': str(token_refresco),
-            'rol': usuario.role.name if usuario.role else None,
+            'rol': rol,
         }
