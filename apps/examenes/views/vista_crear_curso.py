@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiResponse
+from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiResponse, OpenApiExample
 from core.permissions.permisos_rol import EsDocente
 from apps.examenes.models import Curso
 from apps.examenes.serializers import SerializadorCrearCurso
@@ -22,6 +22,18 @@ from apps.examenes.serializers import SerializadorCrearCurso
         summary='Crear curso',
         description='Crea un nuevo curso. El sistema genera automáticamente un código único de 8 caracteres que el docente puede compartir con sus estudiantes.',
         request=SerializadorCrearCurso,
+        examples=[
+            OpenApiExample(
+                name='Curso de Calculo',
+                value={'nombre': 'Calculo I', 'descripcion': 'Limites, derivadas e integrales'},
+                request_only=True,
+            ),
+            OpenApiExample(
+                name='Curso de Algebra',
+                value={'nombre': 'Algebra Lineal', 'descripcion': 'Vectores, matrices y transformaciones'},
+                request_only=True,
+            ),
+        ],
         responses={
             201: SerializadorCrearCurso,
             400: OpenApiResponse(description='Datos inválidos'),

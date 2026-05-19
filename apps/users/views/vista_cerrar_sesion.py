@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError
-from drf_spectacular.utils import extend_schema, OpenApiResponse, inline_serializer
+from drf_spectacular.utils import extend_schema, OpenApiResponse, inline_serializer, OpenApiExample
 from rest_framework import serializers as drf_serializers
 
 
@@ -18,6 +18,13 @@ from rest_framework import serializers as drf_serializers
             'refresh': drf_serializers.CharField(),
         }
     ),
+    examples=[
+        OpenApiExample(
+            name='Cerrar sesion',
+            value={'refresh': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...'},
+            request_only=True,
+        ),
+    ],
     responses={
         204: OpenApiResponse(description='Sesión cerrada correctamente'),
         400: OpenApiResponse(description='Token inválido o ya expirado'),

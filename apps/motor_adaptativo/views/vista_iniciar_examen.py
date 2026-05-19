@@ -2,7 +2,7 @@ from rest_framework import serializers as drf_serializers
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from drf_spectacular.utils import extend_schema, OpenApiResponse, inline_serializer
+from drf_spectacular.utils import extend_schema, OpenApiResponse, inline_serializer, OpenApiExample
 from core.permissions.permisos_rol import EsEstudiante
 from apps.examenes.models import Examen, Inscripcion
 from apps.motor_adaptativo.models import SesionExamen, ModeloConocimiento
@@ -23,6 +23,13 @@ from apps.motor_adaptativo.services.agente_ia import generar_pregunta
         '- Si `es_guiado=true`: incluye `explicacion` del concepto antes de cada pregunta.'
     ),
     request=SerializadorIniciarExamen,
+    examples=[
+        OpenApiExample(
+            name='Iniciar examen 1',
+            value={'examen_id': 1},
+            request_only=True,
+        ),
+    ],
     responses={
         200: inline_serializer(
             name='RespuestaIniciarExamen',

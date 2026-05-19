@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from rest_framework import status
 from rest_framework_simplejwt.tokens import RefreshToken
-from drf_spectacular.utils import extend_schema, OpenApiResponse, inline_serializer
+from drf_spectacular.utils import extend_schema, OpenApiResponse, inline_serializer, OpenApiExample
 from rest_framework import serializers as drf_serializers
 from apps.users.serializers.serializador_registrar import SerializadorRegistrar
 
@@ -13,6 +13,20 @@ from apps.users.serializers.serializador_registrar import SerializadorRegistrar
     summary='Registrarse',
     description='Crea una cuenta nueva. El rol Estudiante se asigna automáticamente.',
     request=SerializadorRegistrar,
+    examples=[
+        OpenApiExample(
+            name='Estudiante nuevo',
+            value={
+                'first_name': 'Ana',
+                'second_name': 'Maria',
+                'first_last_name': 'Garcia',
+                'second_last_name': 'Lopez',
+                'email': 'ana.garcia@correo.com',
+                'password': 'contrasena123',
+            },
+            request_only=True,
+        ),
+    ],
     responses={
         201: inline_serializer(
             name='RespuestaRegistrar',

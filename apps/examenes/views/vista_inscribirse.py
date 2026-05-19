@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from drf_spectacular.utils import extend_schema, OpenApiResponse
+from drf_spectacular.utils import extend_schema, OpenApiResponse, OpenApiExample
 from core.permissions.permisos_rol import EsEstudiante
 from apps.examenes.models import Curso, Inscripcion
 from apps.examenes.serializers import SerializadorInscribirse, SerializadorInscripcion
@@ -15,6 +15,13 @@ from apps.examenes.serializers import SerializadorInscribirse, SerializadorInscr
         'Si el código no existe o ya está inscrito, retorna un error.'
     ),
     request=SerializadorInscribirse,
+    examples=[
+        OpenApiExample(
+            name='Inscribirse con codigo',
+            value={'codigo': 'AB3X9KLM'},
+            request_only=True,
+        ),
+    ],
     responses={
         201: SerializadorInscripcion,
         400: OpenApiResponse(description='Código inválido o estudiante ya inscrito'),

@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiResponse
+from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiResponse, OpenApiExample
 from core.permissions.permisos_rol import EsDocente
 from apps.examenes.models import Curso, Examen
 from apps.examenes.serializers import SerializadorCrearExamen
@@ -33,6 +33,57 @@ from apps.examenes.serializers import SerializadorCrearExamen
             '- `retroalimentacion`: Si es true, el estudiante ve si acertó o falló después de cada respuesta.'
         ),
         request=SerializadorCrearExamen,
+        examples=[
+            OpenApiExample(
+                name='Examen modo fijo',
+                value={
+                    'curso': 1,
+                    'titulo': 'Examen de Derivadas',
+                    'tema': 'Derivadas de funciones trigonometricas',
+                    'tiempo': 30,
+                    'num_preguntas': 10,
+                    'retroalimentacion': True,
+                    'dificultad_inicial': 1,
+                    'max_intentos': 3,
+                    'es_guiado': False,
+                    'modo': 'fijo',
+                },
+                request_only=True,
+            ),
+            OpenApiExample(
+                name='Examen modo maestria',
+                value={
+                    'curso': 1,
+                    'titulo': 'Practica de Integrales',
+                    'tema': 'Integrales por sustitucion',
+                    'tiempo': 60,
+                    'num_preguntas': 5,
+                    'retroalimentacion': True,
+                    'dificultad_inicial': 1,
+                    'max_intentos': 0,
+                    'es_guiado': True,
+                    'modo': 'maestria',
+                    'max_preguntas': 25,
+                },
+                request_only=True,
+            ),
+            OpenApiExample(
+                name='Examen guiado sin limite de intentos',
+                value={
+                    'curso': 1,
+                    'titulo': 'Repaso de Limites',
+                    'tema': 'Limites al infinito y limites laterales',
+                    'tiempo': 45,
+                    'num_preguntas': 8,
+                    'retroalimentacion': True,
+                    'dificultad_inicial': 2,
+                    'max_intentos': 0,
+                    'es_guiado': True,
+                    'modo': 'fijo',
+                },
+                request_only=True,
+            ),
+        ],
         responses={
             201: SerializadorCrearExamen,
             400: OpenApiResponse(description='Datos inválidos o max_preguntas menor que num_preguntas en modo maestría'),

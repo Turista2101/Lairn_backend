@@ -3,7 +3,7 @@ from rest_framework import serializers as drf_serializers
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from drf_spectacular.utils import extend_schema, OpenApiResponse, OpenApiParameter, inline_serializer
+from drf_spectacular.utils import extend_schema, OpenApiResponse, OpenApiParameter, inline_serializer, OpenApiExample
 from drf_spectacular.openapi import OpenApiTypes
 from core.permissions.permisos_rol import EsEstudiante
 from apps.motor_adaptativo.models import SesionExamen, ModeloConocimiento
@@ -107,6 +107,13 @@ _RESPUESTA_RESPONDER = inline_serializer(
         OpenApiParameter('sesion_id', OpenApiTypes.INT, OpenApiParameter.PATH, description='ID de la sesión de examen'),
     ],
     request=SerializadorResponder,
+    examples=[
+        OpenApiExample(
+            name='Enviar respuesta',
+            value={'respuesta': 'cos(x)', 'tiempo_segundos': 15},
+            request_only=True,
+        ),
+    ],
     responses={
         200: _RESPUESTA_RESPONDER,
         400: OpenApiResponse(description='Examen ya completado, sin pregunta activa o datos inválidos'),
