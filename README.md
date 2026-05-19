@@ -22,6 +22,7 @@
 | [Resumen del Proyecto](docs/RESUMEN_PROYECTO.md) | Visión general sin tecnicismos |
 | [Comandos](docs/COMANDOS.md) | Referencia de comandos Docker y Django |
 | [Guía Completa de Endpoints](docs/GUIA_COMPLETA_ENDPOINTS.md) | Explicación de cada endpoint en lenguaje simple |
+| [Motor de IA](docs/MOTOR_IA.md) | Prompt, agente, ajuste de dificultad y modelo de conocimiento a detalle |
 
 ---
 
