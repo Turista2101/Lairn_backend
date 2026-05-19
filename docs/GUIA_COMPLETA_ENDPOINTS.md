@@ -115,19 +115,14 @@ Le dices al sistema quien eres con tu correo y contrasena. El sistema te entrega
 {
   "access": "eyJ0eXAiOiJKV1QiLCJhbGci...",
   "refresh": "eyJ0eXAiOiJKV1QiLCJhbGci...",
-  "usuario": {
-    "id": 5,
-    "email": "ana@correo.com",
-    "nombre_completo": "Ana Garcia",
-    "rol": "Estudiante"
-  }
+  "rol": "Estudiante"
 }
 ```
 
 **Que significa cada campo recibido:**
 - `access` → Tu llave de acceso. La necesitas para todo lo que hagas a partir de ahora. Dura 5 minutos.
 - `refresh` → Tu llave de reserva para renovar el acceso sin volver a escribir tu contrasena. Dura 24 horas.
-- `usuario` → Tus datos basicos: id, correo, nombre y rol.
+- `rol` → Tu rol en el sistema: `"Estudiante"`, `"Docente"` o `"Administrador"`. El frontend lo usa para mostrar las pantallas correctas.
 
 **Que puede salir mal:**
 - Si el correo o la contrasena son incorrectos, el sistema responde con un mensaje de credenciales invalidas. No especifica cual de los dos esta mal (por seguridad).

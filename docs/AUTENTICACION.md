@@ -24,12 +24,7 @@ Respuesta exitosa (`200 OK`):
 {
   "access": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
   "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9...",
-  "usuario": {
-    "id": 1,
-    "email": "docente@pseudotutor.com",
-    "nombre_completo": "Juan Perez",
-    "rol": "Docente"
-  }
+  "rol": "Docente"
 }
 ```
 
