@@ -1,5 +1,5 @@
 import json
-import anthropic
+import openai
 from django.conf import settings
 
 
@@ -36,7 +36,7 @@ def generar_pregunta(
     guiado: bool = False,
     modelo_conocimiento: dict = None
 ) -> dict:
-    client = anthropic.Anthropic(api_key=settings.ANTHROPIC_API_KEY)
+    client = openai.OpenAI(api_key=settings.OPENAI_API_KEY)
 
     historial_texto = ''
     if historial:
@@ -83,13 +83,13 @@ Si no hay historial de conocimiento, elige el sub-concepto más apropiado para l
 Responde SOLO con este JSON (sin texto adicional):
 {formato_json}"""
 
-    respuesta = client.messages.create(
-        model='claude-haiku-4-5-20251001',
+    respuesta = client.chat.completions.create(
+        model='gpt-4o-mini',
         max_tokens=max_tokens,
         messages=[{'role': 'user', 'content': mensaje}]
     )
 
-    return json.loads(respuesta.content[0].text)
+    return json.loads(respuesta.choices[0].message.content)
 
 
 def actualizar_modelo_conocimiento(conceptos: dict, concepto: str, es_correcta: bool) -> dict:

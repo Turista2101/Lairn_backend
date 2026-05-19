@@ -15,4 +15,5 @@ class SerializadorIniciarSesion(serializers.Serializer):
         return {
             'access': str(token_refresco.access_token),
             'refresh': str(token_refresco),
+            'rol': usuario.role.name if usuario.role else None,
         }

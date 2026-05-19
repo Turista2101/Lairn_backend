@@ -18,6 +18,7 @@ from apps.users.serializers.serializador_iniciar_sesion import SerializadorInici
             fields={
                 'access': drf_serializers.CharField(),
                 'refresh': drf_serializers.CharField(),
+                'rol': drf_serializers.CharField(),
             }
         ),
         400: OpenApiResponse(description='Credenciales incorrectas'),
