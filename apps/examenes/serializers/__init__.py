@@ -1,4 +1,4 @@
-from .serializador_curso import SerializadorCrearCurso, SerializadorCurso
+from .serializador_curso import SerializadorCrearCurso, SerializadorCurso, SerializadorCursoEstudiante
 from .serializador_inscripcion import SerializadorInscribirse, SerializadorInscripcion
 from .serializador_examen import SerializadorCrearExamen, SerializadorExamen
 from .serializador_estudiante import SerializadorEstudianteCurso

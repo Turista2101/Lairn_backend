@@ -2,3 +2,5 @@ from .vista_crear_curso import VistaCrearCurso
 from .vista_inscribirse import VistaInscribirse
 from .vista_crear_examen import VistaCrearExamen
 from .vista_gestionar_estudiantes import VistaEstudiantesCurso
+from .vista_mis_cursos import VistaMisCursos
+from .vista_examenes_curso import VistaExamenesCurso
